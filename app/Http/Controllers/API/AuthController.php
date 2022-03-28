@@ -241,11 +241,12 @@ class AuthController extends Controller
                 $new_users_profile->save();
             } else {
                 $new_users_profile = new Merchant();
-                $new_users_profile->user_id     = $user->id;
-                $new_users_profile->name        = $request->name;
-                $new_users_profile->email       = $request->email;
-                $new_users_profile->shop_name   = $request->shop_name;
-                $new_users_profile->shop_address = $request->shop_address;
+                $new_users_profile->user_id         = $user->id;
+                $new_users_profile->merchant_id     = 'MER-' . $user->id;
+                $new_users_profile->name            = $request->name;
+                $new_users_profile->email           = $request->email;
+                $new_users_profile->shop_name       = $request->shop_name;
+                $new_users_profile->shop_address    = $request->shop_address;
                 $new_users_profile->save();
             }
             $accessToken = $user->createToken('authToken')->accessToken;
