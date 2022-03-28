@@ -247,6 +247,8 @@ class AuthController extends Controller
                 $new_users_profile->email           = $request->email;
                 $new_users_profile->shop_name       = $request->shop_name;
                 $new_users_profile->shop_address    = $request->shop_address;
+                $new_users_profile->latitude        = $request->latitude;
+                $new_users_profile->longitude       = $request->longitude;
                 $new_users_profile->save();
             }
             $accessToken = $user->createToken('authToken')->accessToken;
