@@ -15,7 +15,7 @@ class AdminTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'user_type'     => 'Admin',
+            'user_type'     => '0',
             'name'          => 'Admin',
             'email'         => 'deliveryAdmin@gmail.com',
             'phone_number'  => '0123456789',
