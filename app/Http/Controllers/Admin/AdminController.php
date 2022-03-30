@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -17,6 +19,12 @@ class AdminController extends Controller
     public function adminLogin(Request $request)
     {
         return view('admin.admin_login');
+    }
+
+    public function adminLogout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/');
     }
 
     public function adminMakeAuth(Request $request)

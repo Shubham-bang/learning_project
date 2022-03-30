@@ -71,13 +71,13 @@
                     @endif
                       </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form class="row g-3 needs-validation" action="{{ route('admin.auth') }}" method="post" novalidate>
+                     @csrf
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="email" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">Please enter your username.</div>
                       </div>
                     </div>
@@ -95,6 +95,11 @@
                     
                   </form>
 
+                  @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 mt-4" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
                 </div>
               </div>
 

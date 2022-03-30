@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,8 @@ use App\Http\Controllers\Admin\ProductController;
 
 // Admin Route
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
+Route::post('/admin/auth', [AdminController::class, 'adminMakeAuth'])->name('admin.auth');
+Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
 
 // Route::group(['middleware' => ['auth'],'namespace' => 'Admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
@@ -30,6 +33,10 @@ Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.
     Route::get('/admin/category/list', [ProductController::class, 'getAllCategory'])->name('admin.cate_list');
     Route::get('/admin/category/create/new', [ProductController::class, 'createNewCategory'])->name('admin.cate_new');
     Route::post('/admin/category/store/new', [ProductController::class, 'storeNewCategory'])->name('admin.cate_store');
+// });
+
+// Route::group(['middleware' => ['auth'],'namespace' => 'Admin:User'], function () {
+    Route::get('/admin/users/merchent/list', [UserController::class, 'getAllMerchents'])->name('admin.merchents');
 // });
 
 Route::get('/', function () {

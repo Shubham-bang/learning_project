@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use App\Models\Product;
+use App\Models\CategoryProduct;
 use App\Models\Category;
 
 class ProductController extends Controller
@@ -18,7 +18,10 @@ class ProductController extends Controller
 
     public function getAllProducts(Request $request)
     {
-        $products = Product::orderBy('id','DESC')->get();
+        $products = CategoryProduct::orderBy('id','DESC')->get();
+        foreach ($products as $key => $pro) {
+            $pro->category = Category::where('id', $pro->category_id)->first();
+        }
         return view('admin.products.index', compact('products'));
     }
 
@@ -35,9 +38,8 @@ class ProductController extends Controller
         }
 
         try{
-           $new_product  =  new Product();
-           $new_product->cate_id = $request->get('category_id');
-           $new_product->uid    = \Str::random(15);
+           $new_product  =  new CategoryProduct();
+           $new_product->category_id = $request->get('category_id');
            $new_product->name   = $request->get('name');
            $new_product->status = '1';
            if($request->hasFile('pro_img')){
@@ -48,7 +50,7 @@ class ProductController extends Controller
                 $pro_pic =  \URL::asset('/images').'/'.$filename;
             }
             if($request->hasFile('pro_img')){
-              $new_product->img = $pro_pic;
+              $new_product->image = $pro_pic;
             }
            $new_product->save();
            return redirect()->route('admin.product_list')->with('message','Product Added Successfully!');
@@ -83,7 +85,6 @@ class ProductController extends Controller
 
         try{
            $new_category  =  new Category();
-           $new_category->uid    = \Str::random(15);
            $new_category->name   = $request->get('name');
            $new_category->status = $request->get('status');
            if($request->hasFile('cate_img')){
@@ -94,7 +95,7 @@ class ProductController extends Controller
                 $cate_pic =  \URL::asset('/images').'/'.$filename;
             }
             if($request->hasFile('cate_img')){
-              $new_category->icon = $cate_pic;
+              $new_category->image = $cate_pic;
             }
            $new_category->save();
 

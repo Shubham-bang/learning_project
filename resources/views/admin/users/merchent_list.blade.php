@@ -1,12 +1,12 @@
 @extends('admin.layouts.partials.footer')
 @extends('admin.layouts.partials.content')
 @extends('admin.layouts.partials.header')
-@section ('title') Category List - Admin Dashboard @endsection 
+@section ('title') Merchent List - Admin Dashboard @endsection 
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Category List</h1>
+      <h1>Merchents List</h1>
       <!-- <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -44,24 +44,29 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Icon</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Shop Name</th>
+                    <th scope="col">Shop Address</th>
+                    <th scope="col">Shop Photo</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($merchents as $merchent)
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
-                      <td>{{ $category->name }}</td>
-                      <td><img src="{{ $category->image }}" alt="" height="100px"></td>
-                      <td>
-                         @if ($category->status == '1')
+                      <td>{{ $merchent->name }}</td>
+                      <td>{{ $merchent->email }}</td>
+                      <td>{{ $merchent->shop_name }}</td>
+                      <td>{{ $merchent->shop_address }}</td>
+                      <td><img src="{{ $merchent->shop_photo }}" alt="" height="100px"></td>
+                      <!-- <td>
+                         @if ($merchent->status == '1')
                           <button class="btn btn-primary">Active</button>
-                         @elseif ($category->status == '0') 
+                         @elseif ($merchent->status == '0') 
                          <button class="btn btn-danger">Inactive</button>
                          @endif
-                      </td>
+                      </td> -->
                       <td>
                          <a href="#" class="btn btn-primary">Edit</a>
                       </td>

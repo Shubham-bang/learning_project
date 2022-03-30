@@ -35,9 +35,8 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+            <div class="card-body pt-4">
+              <!-- <h5 class="card-title">Datatables</h5> -->
 
               <!-- Table with stripped rows -->
               <table class="table datatable">
@@ -56,16 +55,16 @@
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
                       <td>{{ $pro->name }}</td>
-                      <td><img src="{{ $pro->img }}" alt="" height="100px"></td>
-                      <td>{{ $pro->name }}</td>
+                      <td><img src="{{ $pro->image }}" alt="" height="100px"></td>
+                      <td>{{ $pro->category->name }}</td>
                       <td>
                          @if ($pro->status == '1')
-                          <button class="badge badge-primary">Active</button>
+                          <button class="btn btn-primary">Active</button>
                          @elseif ($pro->status == '0') 
-                         <button class="badge badge-danger">Inactive</button>
+                         <button class="btn btn-danger">Inactive</button>
                          @endif
                       </td>
-                      <td><a href="#" class="badge badge-primary">Edit</a></td>
+                      <td><a href="#" class="btn btn-primary">Edit</a></td>
                     </tr>
                   @endforeach
                   
