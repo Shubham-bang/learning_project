@@ -82,6 +82,11 @@ class ShopController extends Controller
         $lon = $request->longitude;
         $max_distance = $request->distance;
 
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+        $customer->latitude     = $lat;
+        $customer->longitude    = $lon;
+        $customer->save();
+
         $user = User::find(Auth::user()->id);
         $find_location = Merchant::getLocation($lat, $lon);
         $list = [];

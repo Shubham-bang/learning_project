@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ShopController;
+use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,10 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
     Route::get('categories_listing', [CategoryController::class, 'index']);
     Route::post('category_by_product', [CategoryController::class, 'categoryByProduct']);
     Route::post('add_product_in_shop', [CategoryController::class, 'store']);
+    Route::get('upcomming_orders', [OrderController::class, 'show']);
+    Route::get('delivered_orders', [OrderController::class, 'deliveredOrders']);
+    Route::post('order_delivered', [OrderController::class, 'orderDeliver']);
+    Route::post('order_cancel', [OrderController::class, 'orderCancel']);
 });
 
 /*APIs for customer*/
@@ -44,4 +50,8 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'customer'], function
 
     Route::post('shop_products', [ShopController::class, 'index']);
     Route::post('find_merhant', [ShopController::class, 'store']);
+    Route::post('place_order', [OrderController::class, 'store']);
+    Route::post('list_of_address', [UserController::class, 'index']);
+    Route::post('add_address', [UserController::class, 'store']);
 });
+
