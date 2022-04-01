@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommonController;
+use App\Http\Controllers\API\CommonController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -44,7 +44,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.admin_dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/user/account/verification/{token}/{id}' , [CommonController::class , 'userAccountVerification'])->name('user.account_verify');
