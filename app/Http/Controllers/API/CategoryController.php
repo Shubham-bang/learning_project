@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class CategoryController extends Controller
 {
