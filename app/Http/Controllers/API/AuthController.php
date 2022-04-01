@@ -173,7 +173,7 @@ class AuthController extends Controller
             'token' => $accessToken,
         ];
         return response()->json([
-            'message' => 'Verification of your Footbus account has been sent to your email address. Please verify to proceed.',
+            'message' => 'Verification of your DeliveryKirana account has been sent to your email address. Please verify to proceed.',
         ], 200);
     }
     /**
