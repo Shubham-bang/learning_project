@@ -21,4 +21,16 @@ class Merchant extends Model
         'latitude',
         'longitude',
     ];
+
+    public static function getLocation($lat, $lon){
+        return \DB::table("merchant")
+                    ->select("merchant.id"
+                        ,\DB::raw("6371 * acos(cos(radians(" . $lat . ")) 
+                        * cos(radians(merchant.latitude)) 
+                        * cos(radians(merchant.longitude) - radians(" . $lon . ")) 
+                        + sin(radians(" .$lat. ")) 
+                        * sin(radians(merchant.latitude))) AS distance"))
+                        ->groupBy("merchant.id")
+                        ->get();
+    }
 }

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Customer;
+use App\Models\Merchant;
 
 class ShopController extends Controller
 {
@@ -47,8 +50,32 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $lat = $request->latitude;
+        $lon = $request->longitude;
+        $max_distance = $request->distance;
+
+        $user = User::find(Auth::user()->id);
+        $find_location = Merchant::getLocation($lat, $lon);
+        $list = [];
+        $merchants = [];
+        foreach ($find_location as $key => $find_locations) {
+            if ($find_locations->distance < $max_distance ) {
+                $merchants[] = Merchant::find($find_locations->id);
+            } 
+        }
+        if ($merchants == []) {
+            return response()->json([
+                'message' => 'No Merchant Found in between ' . $max_distance . "KM Distance",
+            ], 400);
+        } else {
+            return response()->json([
+                'message' => 'listing of products',
+                'data1' => $merchants,
+                'data2' => $find_location,
+            ], 200);
+        }
+        
     }
 
     /**

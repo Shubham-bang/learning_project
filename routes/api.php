@@ -43,4 +43,5 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'customer'], function () {
 
     Route::post('shop_products', [ShopController::class, 'index']);
+    Route::post('find_merhant', [ShopController::class, 'store']);
 });
