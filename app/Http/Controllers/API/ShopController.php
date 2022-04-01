@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Merchant;
+use Validator;
 
 class ShopController extends Controller
 {
@@ -49,8 +50,22 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    private $create_find_location_rules = [ 
+        'latitude'       => 'required',
+        'longitude'      => 'required',
+        'distance'       => 'required',
+    ];
     public function store(Request $request)
     {   
+        $validator = Validator::make($request->all(), $this->create_find_location_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+
         $lat = $request->latitude;
         $lon = $request->longitude;
         $max_distance = $request->distance;
