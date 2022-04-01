@@ -18,7 +18,6 @@ class CreateCustomerTable extends Migration
             $table->bigInteger('user_id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('profile_pic')->default('default.png')->nullable();
             $table->longText('latitude')->nullable();
             $table->longText('longitude')->nullable();
             $table->timestamps();

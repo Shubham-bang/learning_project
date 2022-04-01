@@ -1,12 +1,12 @@
 @extends('admin.layouts.partials.footer')
 @extends('admin.layouts.partials.content')
 @extends('admin.layouts.partials.header')
-@section ('title') Merchent List - Admin Dashboard @endsection 
+@section ('title') User List - Admin Dashboard @endsection 
 
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Merchents List</h1>
+      <h1>Users List</h1>
       <!-- <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -15,19 +15,19 @@
         </ol>
       </nav> -->
       @if(session()->has('message'))
-									<div class="alert alert-success alert-dismissible fade show" role="alert">
-											<strong>Well done!</strong> {{ session()->get('message') }}
-											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									</div>
-								@endif
-									@if(count($errors) > 0)
-									@foreach($errors->all() as $error)
-												<div class="alert alert-danger alert-dismissible fade show" role="alert">
-											<strong>Oops...!!</strong>{{ $error }} 
-											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									</div>
-											@endforeach
-								@endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Well done!</strong> {{ session()->get('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+            @if(count($errors) > 0)
+            @foreach($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Oops...!!</strong>{{ $error }} 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+                    @endforeach
+        @endif
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -45,25 +45,19 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Shop Name</th>
-                    <th scope="col">Shop Address</th>
-                    <th scope="col">Shop Photo</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($merchents as $merchent)
+                    @foreach ($users as $user)
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
-                      <td>{{ $merchent->name }}</td>
-                      <td>{{ $merchent->email }}</td>
-                      <td>{{ $merchent->shop_name }}</td>
-                      <td>{{ $merchent->shop_address }}</td>
-                      <td><img src="{{URL::to('/images')}}/{{ $merchent->shop_photo }}" alt="" height="70px"></td>
+                      <td>{{ $user->name }}</td>
+                      <td>{{ $user->email }}</td>
                       <!-- <td>
-                         @if ($merchent->status == '1')
+                         @if ($user->status == '1')
                           <button class="btn btn-primary">Active</button>
-                         @elseif ($merchent->status == '0') 
+                         @elseif ($user->status == '0') 
                          <button class="btn btn-danger">Inactive</button>
                          @endif
                       </td> -->

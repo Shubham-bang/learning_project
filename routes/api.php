@@ -29,7 +29,6 @@ Route::post('/verify_otp', [AuthController::class, 'verifyOTP']);
 Route::post('/change_password_with_token', [AuthController::class, 'changePasswordWithToken']);
 Route::post('/verifying_mobile_number', [AuthController::class, 'verifyMobileOTP']);
 Route::post('/change_number', [AuthController::class, 'changeMobileNumber']);
-Route::get('/user/account/verification' , [AuthController::class , 'userAccountVerification'])->name('user.account_verify');
 /*APIs with Token*/
 
 /*APIs for merhant*/

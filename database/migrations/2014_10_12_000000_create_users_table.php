@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->string('profile_pic')->default('default.png')->nullable();
             $table->longText('api_token')->nullable();
             $table->longText('device_token')->nullable();
             $table->string('device_type')->nullable();

@@ -23,7 +23,7 @@
             </a>
           </li>
           <li>
-            <a href="{{ route('admin.product_list') }}">
+            <a href="{{ route('admin.users') }}">
               <i class="bi bi-circle"></i><span>Users List</span>
             </a>
           </li>

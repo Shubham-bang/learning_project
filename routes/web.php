@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\CommonController;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -35,9 +35,8 @@ Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admi
     Route::post('/admin/category/store/new', [ProductController::class, 'storeNewCategory'])->name('admin.cate_store');
 // });
 
-// Route::group(['middleware' => ['auth'],'namespace' => 'Admin:User'], function () {
-    Route::get('/admin/users/merchent/list', [UserController::class, 'getAllMerchents'])->name('admin.merchents');
-// });
+Route::get('/admin/users/merchent/list', [UserController::class, 'getAllMerchents'])->name('admin.merchents');
+Route::get('/admin/users/users/list', [UserController::class, 'getAllusers'])->name('admin.users');
 
 Route::get('/', function () {
     return view('welcome');

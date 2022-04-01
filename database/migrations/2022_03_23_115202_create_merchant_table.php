@@ -21,7 +21,7 @@ class CreateMerchantTable extends Migration
             $table->string('email')->unique();
             $table->string('shop_name');
             $table->string('shop_address');
-            $table->string('shop_photo')->default('default.png')->nullable();
+            $table->string('shop_photo')->default('shop.png')->nullable();
             $table->longText('latitude')->nullable();
             $table->longText('longitude')->nullable();
             $table->timestamps();
