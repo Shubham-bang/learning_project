@@ -23,10 +23,10 @@ class CommonController extends Controller
                  $data1['email_title']    = $user->name;
                  //mail goes to user
                  Mail::to($data1['email'])->send(new NewUserNotification($data1));
-                 return view('email_verified');
+                 return view('mails.email_verified');
                 
             } else {
-                return view('user_already_verified');
+                return view('mails.user_already_verified');
             }
         
     }
