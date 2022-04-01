@@ -18,9 +18,21 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $create_merchant_rules = [ 
+        'merchant_id'       => 'required',
+    ];
     public function index(Request $request)
     {
-        $check_producdts = Product::where('user_id', $request->user_id)->where('status', 1)->get();
+        $validator = Validator::make($request->all(), $this->create_merchant_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+
+        $check_producdts = Product::where('user_id', $request->merchant_id)->where('status', 1)->get();
         if ($check_producdts->isEmpty()) {
             return response()->json([
                 'message' => 'This Shop-keeper is not added any product in shop',
@@ -76,7 +88,7 @@ class ShopController extends Controller
         $merchants = [];
         foreach ($find_location as $key => $find_locations) {
             if ($find_locations->distance < $max_distance ) {
-                $merchants[] = Merchant::find($find_locations->id);
+                $merchants[] = Merchant::where('id', $find_locations->id)->where('status', 1)->first();
             } 
         }
         if ($merchants == []) {
