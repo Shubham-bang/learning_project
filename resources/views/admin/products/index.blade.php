@@ -59,12 +59,12 @@
                       <td>{{ $pro->category->name }}</td>
                       <td>
                          @if ($pro->status == '1')
-                          <button class="btn btn-primary">Active</button>
+                          <button class="btn btn-success btn-sm">Active</button>
                          @elseif ($pro->status == '0') 
-                         <button class="btn btn-danger">Inactive</button>
+                         <button class="btn btn-danger btn-sm">Inactive</button>
                          @endif
                       </td>
-                      <td><a href="#" class="btn btn-primary">Edit</a></td>
+                      <td><a href="{{ route('admin.product_edit',$pro->id) }}" class="btn btn-primary btn-sm">Edit</a></td>
                     </tr>
                   @endforeach
                   

@@ -68,7 +68,7 @@
                          @endif
                       </td> -->
                       <td>
-                         <a href="#" class="btn btn-primary">Edit</a>
+                         <a href="#" class="btn btn-primary btn-sm">View</a>
                       </td>
                     </tr>
                     @endforeach

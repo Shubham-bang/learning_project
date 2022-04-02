@@ -30,7 +30,11 @@ Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admi
     Route::get('/admin/products/create/new', [ProductController::class, 'createNewProduct'])->name('admin.create_product');
     Route::post('/admin/products/store/new', [ProductController::class, 'storeNewProduct'])->name('admin.store_product');
     Route::get('/admin/products/list', [ProductController::class, 'getAllProducts'])->name('admin.product_list');
+    Route::get('/admin/products/edit/{id}', [ProductController::class, 'editProductById'])->name('admin.product_edit');
+    Route::post('/admin/products/update', [ProductController::class, 'updateProductById'])->name('admin.product_update');
     Route::get('/admin/category/list', [ProductController::class, 'getAllCategory'])->name('admin.cate_list');
+    Route::get('/admin/category/edit/{id}', [ProductController::class, 'editCategoryById'])->name('admin.cate_edit');
+    Route::post('/admin/category/update', [ProductController::class, 'updateCategory'])->name('admin.cate_update');
     Route::get('/admin/category/create/new', [ProductController::class, 'createNewCategory'])->name('admin.cate_new');
     Route::post('/admin/category/store/new', [ProductController::class, 'storeNewCategory'])->name('admin.cate_store');
 // });

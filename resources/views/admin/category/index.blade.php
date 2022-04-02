@@ -57,13 +57,13 @@
                       <td><img src="{{ $category->image }}" alt="" height="100px"></td>
                       <td>
                          @if ($category->status == '1')
-                          <button class="btn btn-primary">Active</button>
+                          <button class="btn btn-success btn-sm">Active</button>
                          @elseif ($category->status == '0') 
-                         <button class="btn btn-danger">Inactive</button>
+                         <button class="btn btn-danger btn-sm">Inactive</button>
                          @endif
                       </td>
                       <td>
-                         <a href="#" class="btn btn-primary">Edit</a>
+                         <a href="{{ route('admin.cate_edit',$category->id) }}" class="btn btn-primary btn-sm">Edit</a>
                       </td>
                     </tr>
                     @endforeach
