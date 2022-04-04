@@ -20,6 +20,10 @@ class Merchant extends Model
         'shop_photo',
         'latitude',
         'longitude',
+        'shop_description',
+        'opening_time',
+        'closing_time',
+        'shop_status',
     ];
 
     public static function getLocation($lat, $lon){

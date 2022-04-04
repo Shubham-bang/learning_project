@@ -39,10 +39,24 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
     Route::get('categories_listing', [CategoryController::class, 'index']);
     Route::post('category_by_product', [CategoryController::class, 'categoryByProduct']);
     Route::post('add_product_in_shop', [CategoryController::class, 'store']);
+
+    /*APIs for order requests*/
     Route::get('upcomming_orders', [OrderController::class, 'show']);
     Route::get('delivered_orders', [OrderController::class, 'deliveredOrders']);
-    Route::post('order_delivered', [OrderController::class, 'orderDeliver']);
+    Route::post('order_deliver', [OrderController::class, 'orderDeliver']);
     Route::post('order_cancel', [OrderController::class, 'orderCancel']);
+
+    /*APIs for shop open and close requests*/
+    Route::post('open_shop', [ShopController::class, 'openShop']);
+    Route::post('close_shop', [ShopController::class, 'closeShop']);
+
+    /*APIs for category and Product-request*/
+    Route::post('request_for_category', [CategoryController::class, 'categoryRequest']);
+    Route::post('request_for_product_in_category', [CategoryController::class, 'productRequest']);
+
+    /*APIs for searching products in categories*/
+    Route::post('search_product', [CategoryController::class, 'searchProduct']);
+
 });
 
 /*APIs for customer*/
@@ -50,7 +64,11 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'customer'], function
 
     Route::post('shop_products', [ShopController::class, 'index']);
     Route::post('find_merhant', [ShopController::class, 'store']);
+
+    /*APIs for placing order*/
     Route::post('place_order', [OrderController::class, 'store']);
+
+    /*APIs for address*/
     Route::post('list_of_address', [UserController::class, 'index']);
     Route::post('add_address', [UserController::class, 'store']);
 });

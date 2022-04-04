@@ -14,6 +14,7 @@ class CategoryProduct extends Model
         'category_id',
         'name',
         'image',
+        'description',
         'status',
     ];
 }

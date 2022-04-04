@@ -16,6 +16,7 @@ use App\Mail\VerificationMail;
 use Carbon\Carbon;
 use Dirape\Token\Token;
 use Log;
+use DB;
 
 class AuthController extends Controller
 {
@@ -121,6 +122,13 @@ class AuthController extends Controller
                     return $this->responseError(trans('Sorry, your account has been Suspended by admin'), 400);
 
                 }
+
+                DB::table('oauth_access_tokens')
+                    ->where('user_id', $user->id)
+                    ->update([
+                        'revoked' => true
+                    ]);
+
                 /* check device_token*/
                 $check_token = User::where('device_token', $request->device_token)->get();
                 if ($check_token->isEmpty()) {

@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\CategoryRequest;
+use App\Models\ProductRequest;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -20,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::where('status', 1)->get();
+        $category = Category::where('status', 1)->orderBy('name')->get();
         if ($category->isEmpty()) {
             return response()->json([
                 'message' => 'No Category Found',
@@ -53,7 +55,7 @@ class CategoryController extends Controller
             ], 400);
         }
 
-        $products = CategoryProduct::where('category_id', $request->category_id)->where('status', 1)->get();
+        $products = CategoryProduct::where('category_id', $request->category_id)->where('status', 1)->limit(200)->get();
         if ($products->isEmpty()) {
             return response()->json([
                 'message' => 'No Product Found in this Category',
@@ -112,9 +114,30 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    private $create_category_request_rules = [ 
+        'category_name'         => 'required',
+        'category_description'  => 'required',
+    ];
+    public function categoryRequest(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->create_category_request_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+
+        $category = new CategoryRequest();
+        $category->merchant_id          = Auth::user()->id;
+        $category->category_name        = $request->category_name;
+        $category->category_description = $request->category_description;
+        $category->save();
+
+        return response()->json([
+            'message' => 'Request Send Successfully',
+        ], 200);
     }
 
     /**
@@ -123,9 +146,32 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    private $create_product_request_rules = [ 
+        'category_id'            => 'required',
+        'product_name'           => 'required',
+        'product_description'    => 'required',
+    ];
+    public function productRequest(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->create_product_request_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+
+        $category = new ProductRequest();
+        $category->merchant_id          = Auth::user()->id;
+        $category->category_id          = $request->category_id;
+        $category->product_name         = $request->product_name;
+        $category->product_description  = $request->product_description;
+        $category->save();
+
+        return response()->json([
+            'message' => 'Request Send Successfully',
+        ], 200);
     }
 
     /**
@@ -135,9 +181,39 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    private $create_search_product_rules = [ 
+        'category_id'            => 'required',
+        'searching_data'         => 'required',
+    ];
+    public function searchProduct(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->create_search_product_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+        $search_word    = $request->searching_data;
+        $product        = product_request::where('product_name','LIKE','%'.$search_word.'%')->limit(20)->get();
+        $result = null;
+        foreach ($product as $key => $search_product) {
+            if($search_product->category_id == $request->category_id){
+                $result[] = $search_product;
+            }
+        }
+        if ($result == null) {
+            return response()->json([
+                'message' => 'Not found',
+            ], 400);
+        }
+        if (count($result) > 0 ) {
+            return response()->json([
+                'data' => $result,
+            ], 200);
+        }
+
     }
 
     /**

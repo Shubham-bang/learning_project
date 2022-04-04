@@ -24,6 +24,10 @@ class CreateMerchantTable extends Migration
             $table->string('shop_photo')->default('shop.png')->nullable();
             $table->longText('latitude')->nullable();
             $table->longText('longitude')->nullable();
+            $table->longText('shop_description')->nullable();
+            $table->string('opening_time')->nullable();
+            $table->string('closing_time')->nullable();
+            $table->boolean('shop_status')->default(1); // 1 - open && 2 - close
             $table->timestamps();
         });
     }

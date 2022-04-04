@@ -102,9 +102,8 @@ class ShopController extends Controller
             ], 400);
         } else {
             return response()->json([
-                'message' => 'listing of products',
-                'data1' => $merchants,
-                'data2' => $find_location,
+                'message'   => 'listing of products',
+                'data'      => $merchants,
             ], 200);
         }
         
@@ -116,9 +115,24 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function openShop(Request $request)
     {
-        //
+        $shop_status = Merchant::find(Auth::user()->id);
+        $shop_status->shop_status = 1;
+        $shop_status->save();
+        return response()->json([
+            'message'   => 'shop open successfully',
+        ], 200);
+    }
+
+    public function closeShop(Request $request)
+    {
+        $shop_status = Merchant::find(Auth::user()->id);
+        $shop_status->shop_status = 0;
+        $shop_status->save();
+        return response()->json([
+            'message'   => 'shop close successfully',
+        ], 200);
     }
 
     /**
