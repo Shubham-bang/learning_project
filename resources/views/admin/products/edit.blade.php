@@ -89,6 +89,13 @@
                 </div>
              
 
+               <div class="row mb-3">
+                  <label for="inputEmail" class="col-sm-2 col-form-label">Product Description</label>
+                  <div class="col-sm-10">
+                    <textarea type="text" class="form-control" name="description" rows="4">{{ $product->description }}</textarea>
+                  </div>
+                </div>
+
                 <div class="row mb-3">
                   <!-- <label class="col-sm-2 col-form-label">Submit Button</label> -->
                   <div class="col-sm-10 text-center">

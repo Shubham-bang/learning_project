@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), $this->create_category_product_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
                 'message' => $message,
             ], 400);
@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), $this->create_product_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
                 'message' => $message,
             ], 400);

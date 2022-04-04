@@ -54,7 +54,7 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), $this->create_merchant_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
                 'message' => $message,
             ], 400);

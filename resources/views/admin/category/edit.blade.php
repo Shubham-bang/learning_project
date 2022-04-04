@@ -71,6 +71,13 @@
                     <input class="form-control" type="file" id="formFile" name="cate_img">
                   </div>
                 </div>
+
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-sm-2 col-form-label">Product Description</label>
+                  <div class="col-sm-10">
+                    <textarea type="text" class="form-control" name="description" rows="4">{{ $category->description }}</textarea>
+                  </div>
+                </div>
              
 
                 <div class="row mb-3">

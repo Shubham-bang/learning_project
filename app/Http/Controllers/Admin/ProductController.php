@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\CategoryProduct;
+use App\Models\ProductRequest;
+use App\Models\CategoryRequest;
+use App\Models\Merchant;
 use App\Models\Category;
 
 class ProductController extends Controller
@@ -50,6 +53,7 @@ class ProductController extends Controller
            $new_product  =  new CategoryProduct();
            $new_product->category_id = $request->get('category_id');
            $new_product->name   = $request->get('name');
+           $new_product->description   = $request->get('description');
            $new_product->status = '1';
            if($request->hasFile('pro_img')){
                 $file_name  =  time() . '.' . $request->file('pro_img')->getClientOriginalName();
@@ -85,6 +89,7 @@ class ProductController extends Controller
            $update_product  =  CategoryProduct::where('id', $id)->first();
            $update_product->category_id = $request->get('category_id');
            $update_product->name   = $request->get('name');
+           $update_product->description   = $request->get('description');
            $update_product->status = '1';
            if($request->hasFile('pro_img')){
                 $file_name  =  time() . '.' . $request->file('pro_img')->getClientOriginalName();
@@ -109,6 +114,27 @@ class ProductController extends Controller
         return view('admin.category.index', compact('categories'));
     }
 
+    // Category Request
+    public function getAllCategoryRequest(Request $request)
+    {
+        $category_requests = CategoryRequest::orderBy('id','DESC')->get();
+        foreach ($category_requests as $key => $value) {
+            $value->merchent = Merchant::where('id',$value->merchant_id)->first();
+        }
+        return view('admin.category_request.index', compact('category_requests'));
+    }
+
+    // Product Request
+    public function getAllProductRequest(Request $request)
+    {
+        $products_requests = ProductRequest::orderBy('id','DESC')->get();
+        foreach ($products_requests as $key => $value) {
+            $value->merchent = Merchant::where('id',$value->merchant_id)->first();
+            $value->category = Category::where('id',$value->category_id)->first();
+        }
+        return view('admin.category_request.product_request', compact('products_requests'));
+    }
+
     public function createNewCategory(Request $request)
     {
         return view('admin.category.add');
@@ -130,6 +156,7 @@ class ProductController extends Controller
         try{
            $new_category  =  new Category();
            $new_category->name   = $request->get('name');
+           $new_category->description   = $request->get('description');
            $new_category->status = $request->get('status');
            if($request->hasFile('cate_img')){
                 $file_name  =  time() . '.' . $request->file('cate_img')->getClientOriginalName();
@@ -170,6 +197,7 @@ class ProductController extends Controller
             $id = $request->get('cate_id');
            $category  =  Category::where('id',$id)->first();
            $category->name   = $request->get('name');
+           $category->description   = $request->get('description');
            $category->status = $request->get('status');
            if($request->hasFile('cate_img')){
                 $file_name  =  time() . '.' . $request->file('cate_img')->getClientOriginalName();

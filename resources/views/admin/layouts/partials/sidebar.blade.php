@@ -64,6 +64,23 @@
           </li>
         </ul>
       </li><!-- End Tables Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#product-request-tab" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Product Requests</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="product-request-tab" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('cate.request') }}">
+              <i class="bi bi-circle"></i><span> Category Requests</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('product.req') }}">
+              <i class="bi bi-circle"></i><span>Product Requests</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
 
       
 

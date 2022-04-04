@@ -181,7 +181,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_user_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
                 'message' => $message,
             ], 400);
@@ -313,7 +313,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_forgot_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
             'message' => $message,
         ], 400);
@@ -356,7 +356,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_verifyOTP_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
             'message' => $message,
         ], 400);
@@ -391,7 +391,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_changepassword_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
             'message' => $message,
         ], 400);
@@ -429,7 +429,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_change_number_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
             'message' => $message,
         ], 400);
