@@ -82,7 +82,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $this->create_login_rules);
      
         if ($validator->fails()) { 
-            $message = $validator->errors();
+            $message = $validator->errors()->first();
             return response()->json([
             'message' => $message,
         ], 400);
@@ -141,9 +141,21 @@ class AuthController extends Controller
                     $user->save();
                 }
                 
+                if($request->user_type == "1"){
+                    $customer = Customer::where('user_id',$user->id)->first();
+                    return response(['user' => $user,'customer' => $customer, 'access_token' => $accessToken]);
+                }elseif ($request->user_type == "2") {
+                    $shop = Merchant::where('id', $user->id)->first();
+                    return response(['user' => $user,'shop' => $shop, 'access_token' => $accessToken]);
+                } else{
+                    auth()->logout();
+                    session()->flush();
+
+                    return $this->responseError(trans('Sorry, Some thing went wrong!!'), 500);
+                }
                 
 
-                return response(['user' => $user, 'access_token' => $accessToken]);
+                
             } else {
                 return response(['message' => 'Your Password is Incorrect.'], 400);
             }
@@ -201,7 +213,7 @@ class AuthController extends Controller
                 $new_users_profile->name    = $request->name;
                 $new_users_profile->email   = $request->email;
                 $new_users_profile->save();
-            } else {
+            } else if($request->user_type == 2){
                 $new_users_profile = new Merchant();
                 $new_users_profile->user_id         = $user->id;
                 $new_users_profile->merchant_id     = 'MER-' . $user->id;
@@ -212,6 +224,8 @@ class AuthController extends Controller
                 $new_users_profile->latitude        = $request->latitude;
                 $new_users_profile->longitude       = $request->longitude;
                 $new_users_profile->save();
+            }else{
+                return response(['message' => 'The User Type is invalid.'], 400);
             }
             
             $accessToken = $user->createToken('authToken')->accessToken;
