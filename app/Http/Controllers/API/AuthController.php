@@ -153,7 +153,7 @@ class AuthController extends Controller
                     $customer = Customer::where('user_id',$user->id)->first();
                     return response(['user' => $user,'customer' => $customer, 'access_token' => $accessToken]);
                 }elseif ($request->user_type == "2") {
-                    $shop = Merchant::where('id', $user->id)->first();
+                    $shop = Merchant::where('user_id', $user->id)->first();
                     return response(['user' => $user,'shop' => $shop, 'access_token' => $accessToken]);
                 } else{
                     auth()->logout();
