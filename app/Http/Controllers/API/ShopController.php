@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\CategoryProduct;
 use App\Models\Merchant;
 use Validator;
 
@@ -33,6 +34,9 @@ class ShopController extends Controller
         }
 
         $check_producdts = Product::where('user_id', $request->merchant_id)->where('status', 1)->get();
+        foreach ($check_producdts as $key => $check_producdt) {
+            $check_producdt->product_detail =  CategoryProduct::find($check_producdt->product_id);
+        }
         if ($check_producdts->isEmpty()) {
             return response()->json([
                 'message' => 'This Shop-keeper is not added any product in shop',
