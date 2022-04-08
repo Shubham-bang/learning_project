@@ -110,9 +110,55 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateUserProfile(Request $request)
     {
-        //
+        $user_type = $request->get('user_type');
+        $id = auth()->user()->id;
+        if($user_type == '1'){
+            $user = User::find($id);
+            $user->name           = $request->get('name');
+            $user->phone_number   = $request->get('phone');
+            $user->save();
+            $customer  = Customer::where('user_id', $id)->first();
+            $customer->name  = $request->get('name');
+            if($request->hasFile('profile_pic')){
+                $file_name  =  time() . '.' . $request->file('profile_pic')->getClientOriginalName();
+                $public_path = public_path() . '/images';
+                $path = $request->profile_pic->move($public_path ,$file_name);
+                $filename = basename($path);
+                $profile_pic =  \URL::asset('/images').'/'.$filename;
+            }
+            if($request->hasFile('profile_pic')){
+              $customer->profile_pic  = $profile_pic;
+            }
+            $customer->latitude  = $request->get('latitude');
+            $customer->longitude  = $request->get('longitude');
+            $customer->save();
+        }elseif($user_type == '2') {   // Merchent
+            $merchent                = Merchant::where('user_id', $id)->first();
+            $merchent->name          = $request->get('name');
+            $merchent->shop_name     = $request->get('shop_name');
+            $merchent->shop_address  = $request->get('shop_address');
+            if($request->hasFile('shop_pic')){
+                $file_name  =  time() . '.' . $request->file('shop_pic')->getClientOriginalName();
+                $public_path = public_path() . '/images';
+                $path = $request->shop_pic->move($public_path ,$file_name);
+                $filename = basename($path);
+                $shop_pic =  \URL::asset('/images').'/'.$filename;
+            }
+            if($request->hasFile('shop_pic')){
+              $merchent->shop_photo  = $shop_pic;
+            }
+            $merchent->latitude          = $request->get('latitude');
+            $merchent->longitude         =  $request->get('longitude');
+            $merchent->shop_description  = $request->get('shop_description');
+            $merchent->opening_time      = $request->get('opening_time');
+            $merchent->closing_time      = $request->get('closing_time');
+            $merchent->shop_status       = $request->get('shop_status');
+            $merchent->save();
+        } else{
+            return response()->json(['messages' => 'Something went wrong!!'], 400);
+        }
     }
 
     /**
