@@ -93,19 +93,28 @@ class CategoryController extends Controller
             ], 400);
         }
 
-        $add_product = new Product();
-        $add_product->user_id           = Auth::user()->id;
-        $add_product->category_id       = $request->category_id;
-        $add_product->product_id        = $request->product_id;
-        $add_product->weight            = $request->weight;
-        $add_product->unit              = $request->unit;
-        $add_product->price             = $request->price;
-        $add_product->discount_price    = $request->discount_price;
-        $add_product->save();
+        $check_product = Product::where('user_id', Auth::user()->id)->where('product_id', $request->product_id)->first();
+        if (isset($check_product)) {
+            return response()->json([
+                'message' => 'this product is already added in your shop',
+            ], 400);
+        }
+        else{
+            $add_product = new Product();
+            $add_product->user_id           = Auth::user()->id;
+            $add_product->category_id       = $request->category_id;
+            $add_product->product_id        = $request->product_id;
+            $add_product->weight            = $request->weight;
+            $add_product->unit              = $request->unit;
+            $add_product->price             = $request->price;
+            $add_product->discount_price    = $request->discount_price;
+            $add_product->save();
 
-        return response()->json([
-            'message' => 'Product added in your Shop',
-        ], 200);
+            return response()->json([
+                'message' => 'Product added in your Shop',
+            ], 200);
+        }
+
     }
 
     /**
