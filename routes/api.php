@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
     Route::get('categories_listing', [CategoryController::class, 'index']);
     Route::post('category_by_product', [CategoryController::class, 'categoryByProduct']);
     Route::post('add_product_in_shop', [CategoryController::class, 'store']);
+    Route::post('product/update', [CategoryController::class, 'updateProduct']);
 
     /*APIs for order requests*/
     Route::get('upcomming_orders', [OrderController::class, 'show']);
@@ -49,6 +50,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
     /*APIs for shop open and close requests*/
     Route::post('open_shop', [ShopController::class, 'openShop']);
     Route::post('close_shop', [ShopController::class, 'closeShop']);
+    Route::post('shop/toggle', [ShopController::class, 'shopToggle']);
 
     /*APIs for category and Product-request*/
     Route::post('request_for_category', [CategoryController::class, 'categoryRequest']);
@@ -71,5 +73,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'customer'], function
     /*APIs for address*/
     Route::post('list_of_address', [UserController::class, 'index']);
     Route::post('add_address', [UserController::class, 'store']);
+    // Update profile
+    Route::post('update/user/profile', [UserController::class, 'updateUserProfile']);
 });
 

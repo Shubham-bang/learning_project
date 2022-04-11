@@ -117,6 +117,34 @@ class CategoryController extends Controller
 
     }
 
+    private $update_product_rules = [ 
+        'product_id'        => 'required',
+    ];
+    public function updateProduct(Request $request)
+    {
+        $validator = Validator::make($request->all(), $this->update_product_rules);
+     
+        if ($validator->fails()) { 
+            $message = $validator->errors()->first();
+            return response()->json([
+                'message' => $message,
+            ], 400);
+        }
+        
+        $pro_id = $request->get('product_id');
+        $user_id = auth()->user()->id;
+        $update_product = Product::where('user_id', $user_id)->where('product_id', $pro_id)->first();
+        $update_product->weight            = $request->weight;
+        $update_product->unit              = $request->unit;
+        $update_product->price             = $request->price;
+        $update_product->discount_price    = $request->discount_price;
+        $update_product->save();
+
+        return response()->json([
+            'message' => 'Product updated in your Shop',
+        ], 200);
+    }
+
     /**
      * Display the specified resource.
      *

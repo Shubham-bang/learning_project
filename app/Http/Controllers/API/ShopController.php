@@ -139,6 +139,27 @@ class ShopController extends Controller
         ], 200);
     }
 
+    public function shopToggle(Request $request)
+    {
+        $shop = Merchant::where('user_id', Auth::user()->id)->first();
+        $shop_status = $shop->shop_status;
+
+
+        switch($shop_status){
+            case 0:   // inactive
+              $shop->status = 1; // active
+              $shop->save();
+              break;
+            case 1 :  // active 
+              $shop->status = 0; // inactive
+              $shop->save();
+              break;
+        }
+        return response()->json([
+            'message'   => 'shop status changed successfully',
+        ], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
