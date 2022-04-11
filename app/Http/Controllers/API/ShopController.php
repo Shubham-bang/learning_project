@@ -157,6 +157,7 @@ class ShopController extends Controller
         }
         return response()->json([
             'message'   => 'shop status changed successfully',
+            'status' =>  $shop->shop_status,
         ], 200);
     }
 
