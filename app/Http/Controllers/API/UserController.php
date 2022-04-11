@@ -135,6 +135,9 @@ class UserController extends Controller
             $customer->longitude  = $request->get('longitude');
             $customer->save();
         }elseif($user_type == '2') {   // Merchent
+            $user = User::find($id);
+            $user->name           = $request->get('name');
+            $user->phone_number   = $request->get('phone');
             $merchent                = Merchant::where('user_id', $id)->first();
             $merchent->name          = $request->get('name');
             $merchent->shop_name     = $request->get('shop_name');
@@ -150,7 +153,7 @@ class UserController extends Controller
               $merchent->shop_photo  = $shop_pic;
             }
             $merchent->latitude          = $request->get('latitude');
-            $merchent->longitude         =  $request->get('longitude');
+            $merchent->longitude         = $request->get('longitude');
             $merchent->shop_description  = $request->get('shop_description');
             $merchent->opening_time      = $request->get('opening_time');
             $merchent->closing_time      = $request->get('closing_time');
