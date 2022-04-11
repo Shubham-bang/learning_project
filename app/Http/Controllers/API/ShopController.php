@@ -147,11 +147,11 @@ class ShopController extends Controller
 
         switch($shop_status){
             case 0:   // inactive
-              $shop->status = 1; // active
+              $shop->shop_status = 1; // active
               $shop->save();
               break;
             case 1 :  // active 
-              $shop->status = 0; // inactive
+              $shop->shop_status = 0; // inactive
               $shop->save();
               break;
         }
