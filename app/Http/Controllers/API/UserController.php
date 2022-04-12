@@ -134,6 +134,8 @@ class UserController extends Controller
             $customer->latitude  = $request->get('latitude');
             $customer->longitude  = $request->get('longitude');
             $customer->save();
+
+            return response(['user' => $user,'customer' => $customer], 200);
         }elseif($user_type == '2') {   // Merchent
             $user = User::find($id);
             $user->name           = $request->get('name');
@@ -159,6 +161,8 @@ class UserController extends Controller
             $merchent->closing_time      = $request->get('closing_time');
             $merchent->shop_status       = $request->get('shop_status');
             $merchent->save();
+
+            return response(['user' => $user,'shop' => $merchent], 200);
         } else{
             return response()->json(['messages' => 'Something went wrong!!'], 400);
         }
