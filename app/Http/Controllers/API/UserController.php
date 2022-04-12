@@ -159,7 +159,7 @@ class UserController extends Controller
             $merchent->shop_description  = $request->get('shop_description');
             $merchent->opening_time      = $request->get('opening_time');
             $merchent->closing_time      = $request->get('closing_time');
-            $merchent->shop_status       = $request->get('shop_status');
+            $merchent->shop_status       = "1";
             $merchent->save();
 
             return response(['user' => $user,'shop' => $merchent], 200);
