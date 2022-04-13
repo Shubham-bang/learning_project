@@ -39,10 +39,12 @@ Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admi
     Route::post('/admin/category/update', [ProductController::class, 'updateCategory'])->name('admin.cate_update');
     Route::get('/admin/category/create/new', [ProductController::class, 'createNewCategory'])->name('admin.cate_new');
     Route::post('/admin/category/store/new', [ProductController::class, 'storeNewCategory'])->name('admin.cate_store');
+
 // });
 
 Route::get('/admin/users/merchent/list', [UserController::class, 'getAllMerchents'])->name('admin.merchents');
 Route::get('/admin/users/users/list', [UserController::class, 'getAllusers'])->name('admin.users');
+Route::get('change/merchent/status/{id}', [UserController::class, 'changeMerchentStatus'])->name('merhant.status');
 
 Route::get('/', function () {
     return view('welcome');

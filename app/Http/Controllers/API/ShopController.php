@@ -93,7 +93,12 @@ class ShopController extends Controller
 
         $user = User::find(Auth::user()->id);
         $find_location = Merchant::getLocation($lat, $lon);
+        // return response()->json([
+        //         'location' => $find_location,
+        //     ], 200);
+
         $list = [];
+
         $merchants = [];
         foreach ($find_location as $key => $find_locations) {
             if ($find_locations->distance < $max_distance ) {
@@ -116,7 +121,8 @@ class ShopController extends Controller
             return response()->json([
                 'message'   => 'listing of products',
                 'data'      => $merchants,
-            ], 200);
+                'data1'     => $find_location,
+            ], 200); 
         }
         
     }

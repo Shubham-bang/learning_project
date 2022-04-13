@@ -3,6 +3,8 @@
 @extends('admin.layouts.partials.header')
 @section ('title') Merchent List - Admin Dashboard @endsection 
 
+
+@section('content')
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -46,8 +48,10 @@
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Shop Name</th>
+                    
                     <th scope="col">Shop Address</th>
                     <th scope="col">Shop Photo</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -60,13 +64,20 @@
                       <td>{{ $merchent->shop_name }}</td>
                       <td>{{ $merchent->shop_address }}</td>
                       <td><img src="{{URL::to('/images')}}/{{ $merchent->shop_photo }}" alt="" height="70px"></td>
-                      <!-- <td>
-                         @if ($merchent->status == '1')
-                          <button class="btn btn-primary">Active</button>
-                         @elseif ($merchent->status == '0') 
-                         <button class="btn btn-danger">Inactive</button>
+                     <!--  <td>
+                         @if ($merchent->user->is_active == '1')
+                          <button class="btn btn-primary" value="{{ $merchent->user->id }}" class="merchentStatus">Active </button>
+                         @elseif ($merchent->user->is_active == '0') 
+                         <button class="btn btn-danger" value="{{ $merchent->user->id }}" class="merchentStatus">Inactive </button>
                          @endif
                       </td> -->
+                      <td>
+                         @if ($merchent->user->is_active == '1')
+                          <a class="btn btn-primary" href="{{ route('merhant.status',$merchent->user->id) }}" class="merchentStatus">Active </a>
+                         @elseif ($merchent->user->is_active == '0') 
+                         <a class="btn btn-danger" href="{{ route('merhant.status',$merchent->user->id) }}" class="merchentStatus">Inactive </a>
+                         @endif
+                      </td>
                       <td>
                          <a href="#" class="btn btn-primary btn-sm">View</a>
                       </td>
@@ -115,4 +126,4 @@
   </main><!-- End #main -->
 
 
-@section('content')
+@endsection

@@ -60,14 +60,14 @@
                       <td>{{ $product->merchent->name }}</td>
                       <td>{{ $product->product_description }}</td>
                       <td>
-                         @if ($category->status == '1')
+                         @if ($product->status == '1')
                           <button class="btn btn-success btn-sm">Active</button>
-                         @elseif ($category->status == '0') 
+                         @elseif ($product->status == '0') 
                          <button class="btn btn-danger btn-sm">Inactive</button>
                          @endif
                       </td>
                       <td>
-                         <!-- <a href="{{ route('admin.cate_edit',$category->id) }}" class="btn btn-primary btn-sm">Edit</a> -->
+                         <!-- <a href="{{ route('admin.cate_edit',$product->id) }}" class="btn btn-primary btn-sm">Edit</a> -->
                       </td>
                     </tr>
                     @endforeach

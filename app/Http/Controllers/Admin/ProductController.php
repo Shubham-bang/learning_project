@@ -124,6 +124,44 @@ class ProductController extends Controller
         return view('admin.category_request.index', compact('category_requests'));
     }
 
+    public function changeCategoryRequestStatus(Request $request, $id)
+    {
+        $category_request = CategoryRequest::where('id', $id)->first();
+
+        $request_status = $user->category_request;
+
+         switch($request_status){
+            case 0:   // inactive
+              $category_request->status = 1; // active
+              $category_request->save();
+              break;
+            case 1 :  // active 
+              $category_request->status = 0; // inactive
+              $category_request->save();
+              break;
+        }
+        return redirect()->back()->with('message' , "Status Updated Successfully!!");
+    }
+
+    public function changeProductRequestStatus(Request $request, $id)
+    {
+        $category_request = ProductRequest::where('id', $id)->first();
+
+        $request_status = $user->category_request;
+
+         switch($request_status){
+            case 0:   // inactive
+              $category_request->status = 1; // active
+              $category_request->save();
+              break;
+            case 1 :  // active 
+              $category_request->status = 0; // inactive
+              $category_request->save();
+              break;
+        }
+        return redirect()->back()->with('message' , "Status Updated Successfully!!");
+    }
+
     // Product Request
     public function getAllProductRequest(Request $request)
     {

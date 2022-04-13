@@ -24,4 +24,8 @@
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
+  <!-- other -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prelodr/2.1.1/prelodr.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 </head>
