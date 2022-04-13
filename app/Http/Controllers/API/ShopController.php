@@ -105,6 +105,14 @@ class ShopController extends Controller
                 'message' => 'No Merchant Found in between ' . $max_distance . "KM Distance",
             ], 400);
         } else {
+            foreach ($merchants as $key => $merchants_value) {
+                if ($merchants_value->delivery_range <= $max_distance) {
+                    $merchants_value->delivery_status = false;
+                } else {
+                    $merchants_value->delivery_status = true;
+                }
+                 
+            }
             return response()->json([
                 'message'   => 'listing of products',
                 'data'      => $merchants,

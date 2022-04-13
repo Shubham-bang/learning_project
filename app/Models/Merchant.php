@@ -24,6 +24,8 @@ class Merchant extends Model
         'opening_time',
         'closing_time',
         'shop_status',
+        'delivery_range',
+        'status',
     ];
 
     public static function getLocation($lat, $lon){
