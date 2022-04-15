@@ -128,7 +128,7 @@ class ProductController extends Controller
     {
         $category_request = CategoryRequest::where('id', $id)->first();
 
-        $request_status = $user->category_request;
+        $request_status = $category_request->status;
 
          switch($request_status){
             case 0:   // inactive
@@ -145,20 +145,22 @@ class ProductController extends Controller
 
     public function changeProductRequestStatus(Request $request, $id)
     {
-        $category_request = ProductRequest::where('id', $id)->first();
+        $product_request = ProductRequest::where('id', $id)->first();
 
-        $request_status = $user->category_request;
-
+        $request_status = $product_request->status;
+      // dd($request_status);
          switch($request_status){
             case 0:   // inactive
-              $category_request->status = 1; // active
-              $category_request->save();
+              $product_request->status = 1; // active
+              $product_request->save();
               break;
-            case 1 :  // active 
-              $category_request->status = 0; // inactive
-              $category_request->save();
+            case 0 :  // active 
+              $product_request->status = 0; // inactive
+              $product_request->save();
               break;
         }
+
+        // dd($product_request);
         return redirect()->back()->with('message' , "Status Updated Successfully!!");
     }
 
@@ -170,6 +172,7 @@ class ProductController extends Controller
             $value->merchent = Merchant::where('id',$value->merchant_id)->first();
             $value->category = Category::where('id',$value->category_id)->first();
         }
+        // dd($products_requests->toArray());
         return view('admin.category_request.product_request', compact('products_requests'));
     }
 

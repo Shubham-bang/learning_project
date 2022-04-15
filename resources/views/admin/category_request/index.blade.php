@@ -54,14 +54,14 @@
                     @foreach ($category_requests as $category)
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
-                      <td>{{ $category->merchent->name }}</td>
-                      <td>{{ $category->category_name }}</td>
-                      <td>{{ $category->category_description }}</td>
+                      <td>{{ $category->merchent->name ?? '' }}</td>
+                      <td>{{ $category->category_name ?? ''}}</td>
+                      <td>{{ $category->category_description ? '' }}</td>
                       <td>
-                         @if ($category->status == '1')
-                          <button class="btn btn-success btn-sm">Active</button>
-                         @elseif ($category->status == '0') 
-                         <button class="btn btn-danger btn-sm">Inactive</button>
+                         @if ($category->status == 1)
+                          <a class="btn btn-success btn-sm" href="{{ route('category.req.status',$category->id ) }}">Active</a>
+                         @elseif ($category->status == 0) 
+                         <a class="btn btn-danger btn-sm" href="{{ route('category.req.status',$category->id ) }}">Inactive</a>
                          @endif
                       </td>
                       <td>

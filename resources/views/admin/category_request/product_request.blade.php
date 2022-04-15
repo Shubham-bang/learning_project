@@ -2,7 +2,7 @@
 @extends('admin.layouts.partials.content')
 @extends('admin.layouts.partials.header')
 @section ('title') Products Enquiry - Admin Dashboard @endsection 
-
+@section('content')
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -55,15 +55,15 @@
                     @foreach ($products_requests as $product)
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
-                      <td>{{ $product->category->name }}</td>
-                      <td>{{ $product->product_namee }}</td>
-                      <td>{{ $product->merchent->name }}</td>
-                      <td>{{ $product->product_description }}</td>
+                      <td>{{ $product->category->name ?? ''}}</td>
+                      <td>{{ $product->product_name ?? '' }}</td>
+                      <td>{{ $product->merchent->name ?? ''}}</td>
+                      <td>{{ $product->product_description ?? ''}}</td>
                       <td>
-                         @if ($product->status == '1')
-                          <button class="btn btn-success btn-sm">Active</button>
-                         @elseif ($product->status == '0') 
-                         <button class="btn btn-danger btn-sm">Inactive</button>
+                         @if ($product->status == 1)
+                          <a class="btn btn-success btn-sm" href="{{ route('product.req.status', $product->id) }}">Active</a>
+                         @elseif ($product->status == 0) 
+                         <a class="btn btn-danger btn-sm" href="{{ route('product.req.status',$product->id ) }}">Inactive</a>
                          @endif
                       </td>
                       <td>
@@ -114,4 +114,4 @@
   </main><!-- End #main -->
 
 
-@section('content')
+@endsection

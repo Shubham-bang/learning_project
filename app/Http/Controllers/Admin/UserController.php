@@ -22,7 +22,7 @@ class UserController extends Controller
     public function viewMerchentsDetails(Request $request, $id)
     {
         $merchent = Merchant::where('id',$id)->first();
-        return view('admin.users.merchent_list', compact('merchent'));
+        return view('admin.users.view_merchent', compact('merchent'));
     }
 
     public function changeMerchentStatus(Request $request, $id)

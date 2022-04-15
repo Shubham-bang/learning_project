@@ -3,6 +3,7 @@
 @extends('admin.layouts.partials.header')
 @section ('title') User List - Admin Dashboard @endsection 
 
+@section('content')
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -109,4 +110,4 @@
   </main><!-- End #main -->
 
 
-@section('content')
+@endsection

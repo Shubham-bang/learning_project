@@ -79,7 +79,7 @@
                          @endif
                       </td>
                       <td>
-                         <a href="#" class="btn btn-primary btn-sm">View</a>
+                         <a href="{{ route('admin.view_merchent', $merchent->id) }}" class="btn btn-primary btn-sm">View</a>
                       </td>
                     </tr>
                     @endforeach

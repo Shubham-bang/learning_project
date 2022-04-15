@@ -54,9 +54,9 @@
                   @foreach ($products as $pro)
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
-                      <td>{{ $pro->name }}</td>
+                      <td>{{ $pro->name ?? '' }}</td>
                       <td><img src="{{ $pro->image }}" alt="" height="100px"></td>
-                      <td>{{ $pro->category->name }}</td>
+                      <td>{{ $pro->category->name ?? ''}}</td>
                       <td>
                          @if ($pro->status == '1')
                           <button class="btn btn-success btn-sm">Active</button>

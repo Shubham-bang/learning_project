@@ -35,6 +35,8 @@ Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admi
     Route::get('/admin/category/list', [ProductController::class, 'getAllCategory'])->name('admin.cate_list');
     Route::get('/admin/category/request/list', [ProductController::class, 'getAllCategoryRequest'])->name('cate.request');
     Route::get('/admin/product/request/list', [ProductController::class, 'getAllProductRequest'])->name('product.req');
+    Route::get('/product/request/status/change/{id}', [ProductController::class, 'changeProductRequestStatus'])->name('product.req.status');
+    Route::get('/category/request/status/change/{id}', [ProductController::class, 'changeCategoryRequestStatus'])->name('category.req.status');
     Route::get('/admin/category/edit/{id}', [ProductController::class, 'editCategoryById'])->name('admin.cate_edit');
     Route::post('/admin/category/update', [ProductController::class, 'updateCategory'])->name('admin.cate_update');
     Route::get('/admin/category/create/new', [ProductController::class, 'createNewCategory'])->name('admin.cate_new');
@@ -43,6 +45,7 @@ Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admi
 // });
 
 Route::get('/admin/users/merchent/list', [UserController::class, 'getAllMerchents'])->name('admin.merchents');
+Route::get('/admin/users/merchent/view/{id}', [UserController::class, 'viewMerchentsDetails'])->name('admin.view_merchent');
 Route::get('/admin/users/users/list', [UserController::class, 'getAllusers'])->name('admin.users');
 Route::get('change/merchent/status/{id}', [UserController::class, 'changeMerchentStatus'])->name('merhant.status');
 
