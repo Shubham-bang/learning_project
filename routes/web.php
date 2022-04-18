@@ -17,6 +17,11 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
+Route::get('/clear', function() {
+    Artisan::call('migrate');
+    return "Migrate Successfully!!";
+});
+
 // Admin Route
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 Route::post('/admin/auth', [AdminController::class, 'adminMakeAuth'])->name('admin.auth');
