@@ -110,28 +110,28 @@ class ShopController extends Controller
                 'message' => 'No Merchant Found in between ' . $max_distance . "KM Distance",
             ], 400);
         } else {
-            // foreach ($merchants as $key => $merchants_value) {
-            //     if ($merchants_value->delivery_range <= $max_distance) {
-            //         $merchants_value->delivery_status = false;
-            //     } else {
-            //         $merchants_value->delivery_status = true;
-            //     }
-                 
-            // }
-            foreach ($find_location as $key => $location) {
-                foreach ($merchants as $key => $merchants_value) {
-                    if ($merchants_value->delivery_range <= $location->distance) {
-                        $merchants_value->delivery_status = false;
-                    } else {
-                        $merchants_value->delivery_status = true;
-                    }
-                     
+            foreach ($merchants as $key => $merchants_value) {
+                if ($merchants_value->delivery_range <= $max_distance) {
+                    $merchants_value->delivery_status = false;
+                } else {
+                    $merchants_value->delivery_status = true;
                 }
+                 
             }
+            // foreach ($find_location as $key => $location) {
+            //     foreach ($merchants as $key => $merchants_value) {
+            //         if ($merchants_value->delivery_range <= $location->distance) {
+            //             $merchants_value->delivery_status = false;
+            //         } else {
+            //             $merchants_value->delivery_status = true;
+            //         }
+                     
+            //     }
+            // }
             return response()->json([
                 'message'   => 'listing of products',
-                'data'      => $merchants,
-                'data1'     => $find_location,
+                'merchants'      => $merchants,
+                // 'data1'     => $find_location,
             ], 200); 
         }
         
