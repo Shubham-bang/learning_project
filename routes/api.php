@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth:api'], 'namespace' => 'merhant'], function 
 Route::group(['middleware' => ['auth:api'], 'namespace' => 'customer'], function () {
 
     Route::post('shop_products', [ShopController::class, 'index']);
-    Route::post('find_merhant', [ShopController::class, 'store']);
+    Route::post('find_merchant', [ShopController::class, 'store']);
 
     /*APIs for placing order*/
     Route::post('place_order', [OrderController::class, 'store']);
